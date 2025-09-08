@@ -1,0 +1,41 @@
+# Ignore target directory
+target/
+
+# Ignore git files
+.git
+.gitignore
+
+# Ignore IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore SQLite database files from host
+*.db
+*.db-journal
+
+# Ignore Maven wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+# Ignore documentation
+README.md
+*.md
+
+# Ignore test resources
+src/test/
+
+# Ignore Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore

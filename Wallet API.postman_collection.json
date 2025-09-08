@@ -1,0 +1,389 @@
+{
+  "info": {
+    "_postman_id": "wallet-api-collection",
+    "name": "Wallet API - ebra Assignment",
+    "description": "Collection for testing the Wallet API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Check if the wallet service is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/account",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "account"
+          ]
+        },
+        "description": "Create a new user account with zero balance"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Another Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"bob\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/account",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "account"
+          ]
+        },
+        "description": "Create another user account for testing"
+      },
+      "response": []
+    },
+    {
+      "name": "Top-Up Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"amount\": 500.00,\n  \"idempotencyKey\": \"topup-alice-001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/topup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "topup"
+          ]
+        },
+        "description": "Add balance to Alice's account"
+      },
+      "response": []
+    },
+    {
+      "name": "Top-Up Another Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"bob\",\n  \"amount\": 250.75,\n  \"idempotencyKey\": \"topup-bob-001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/topup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "topup"
+          ]
+        },
+        "description": "Add balance to Bob's account"
+      },
+      "response": []
+    },
+    {
+      "name": "Charge Account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"amount\": 150.25,\n  \"idempotencyKey\": \"charge-alice-001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/charge",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "charge"
+          ]
+        },
+        "description": "Deduct balance from Alice's account"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Account Information - Alice",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/account/alice",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "account",
+            "alice"
+          ]
+        },
+        "description": "Get Alice's account information"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Account Information - Bob",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/account/bob",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "account",
+            "bob"
+          ]
+        },
+        "description": "Get Bob's account information"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - User Not Found",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/account/nonexistent",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "account",
+            "nonexistent"
+          ]
+        },
+        "description": "Test error handling for non-existent user"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Duplicate Username",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/account",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "account"
+          ]
+        },
+        "description": "Test error handling for duplicate username"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Insufficient Balance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"amount\": 1000.00,\n  \"idempotencyKey\": \"charge-alice-insufficient\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/charge",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "charge"
+          ]
+        },
+        "description": "Test error handling for insufficient balance"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Duplicate Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"amount\": 50.00,\n  \"idempotencyKey\": \"topup-alice-001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/topup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "topup"
+          ]
+        },
+        "description": "Test error handling for duplicate transaction (reusing idempotency key)"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Invalid Amount (Negative)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"amount\": -50.00,\n  \"idempotencyKey\": \"topup-alice-negative\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/topup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "topup"
+          ]
+        },
+        "description": "Test error handling for negative amount"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Invalid Amount (Too Many Decimals)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\",\n  \"amount\": 50.123,\n  \"idempotencyKey\": \"topup-alice-decimal\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/topup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "topup"
+          ]
+        },
+        "description": "Test error handling for amount with more than 2 decimal places"
+      },
+      "response": []
+    },
+    {
+      "name": "Error Test - Missing Fields",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"alice\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/topup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "topup"
+          ]
+        },
+        "description": "Test validation error for missing required fields"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/wallet",
+      "type": "string"
+    }
+  ]
+}
